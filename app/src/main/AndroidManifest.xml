@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="pizza.asgn.saket">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:name=".app.MyApp"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +17,7 @@
         android:theme="@style/Theme.PizzaApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.pizza.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
