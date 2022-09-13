@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="dataa"
+            type="pizza.asgn.saket.ui.pizza.model.PizzaInfoDataClass"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.pizza.view.PizzaInfoFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp">
+
+            <ImageView
+                android:id="@+id/type_iv"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                app:layout_constraintTop_toTopOf="@+id/name_tv"
+                app:layout_constraintBottom_toBottomOf="@+id/name_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:imageDrawable="@{dataa.isVeg ? @drawable/veg_green_dot :@drawable/non_veg_red_dot}"
+                tools:srcCompat="@drawable/non_veg_red_dot"
+                />
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/type_iv"
+                android:layout_marginStart="4dp"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:text="@={dataa.name}"
+                tools:text="Non-veg pizza"
+                />
+
+            <TextView
+                android:id="@+id/price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/name_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                tools:text="₹235"
+                />
+
+            <TextView
+                android:id="@+id/desc_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/price_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/image_cv"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="6dp"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:text="@={dataa.description}"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/image_cv"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/pizza_image_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="@+id/name_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/non_veg_pizza_default_img"
+                    android:scaleType="centerCrop"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_cv"
+                app:layout_constraintEnd_toEndOf="@+id/image_cv"
+                app:layout_constraintStart_toStartOf="@+id/image_cv"
+                android:translationZ="2dp"
+                android:background="@drawable/red_border_light_bg_round"
+                >
+
+                <TextView
+                    android:id="@+id/add_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="#FF0000"
+                    android:text="ADD"
+                    />
+
+                <TextView
+                    android:id="@+id/add_icon_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="8dp"
+                    android:textSize="16sp"
+                    android:textColor="#FF0000"
+                    android:text="+"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
