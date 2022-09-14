@@ -3,6 +3,7 @@ package pizza.asgn.saket.ui.pizza.view
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -14,6 +15,7 @@ import pizza.asgn.saket.R
 import pizza.asgn.saket.databinding.ActivityMainBinding
 import pizza.asgn.saket.ui.pizza.viewmodel.MainViewModel
 import pizza.asgn.saket.utils.Status
+import pizza.asgn.saket.utils.showToast
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,16 +34,17 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.pizzaInfo.observe(this, Observer {
             when(it.status){
                 Status.LOADING -> {
-                    Log.d("apiStatus","loading")
+                    binding.progressBar.isVisible = true
                 }
                 Status.SUCCESS -> {
+                    binding.progressBar.isVisible = false
                     it.data?.let { mainInfo ->
-                        Log.d("apiStatus","success: ${Gson().toJson(mainInfo)}")
                         supportFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, PizzaInfoFragment()).commit()
                     }
                 }
                 Status.ERROR -> {
-                    Log.d("apiStatus","failed, ${it.message}")
+                    binding.progressBar.isVisible = false
+                    showToast("Api Call Failed: ${it.message}")
                 }
             }
         })

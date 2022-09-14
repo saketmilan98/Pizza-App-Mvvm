@@ -13,6 +13,7 @@ import pizza.asgn.saket.databinding.FragmentCartBinding
 import pizza.asgn.saket.ui.pizza.adapter.CartDataAdapter
 import pizza.asgn.saket.ui.pizza.model.PizzaCartItem
 import pizza.asgn.saket.ui.pizza.viewmodel.MainViewModel
+import pizza.asgn.saket.utils.showToast
 
 class CartFragment : Fragment() {
 
@@ -65,6 +66,9 @@ class CartFragment : Fragment() {
                 binding.totalPriceTv.text = "₹$totalPrice"
             }
         })
+        binding.placeOrderCl.setOnClickListener {
+            requireContext().showToast(getString(R.string.order_placed_successfully))
+        }
     }
 
     fun setCartRvData(){
