@@ -15,7 +15,8 @@ data class Crusts (
     @SerializedName("id"          ) var id          : Int?             = null,
     @SerializedName("name"        ) var name        : String?          = null,
     @SerializedName("defaultSize" ) var defaultSize : Int?             = null,
-    @SerializedName("sizes"       ) var sizes       : ArrayList<Sizes> = arrayListOf()
+    @SerializedName("sizes"       ) var sizes       : ArrayList<Sizes> = arrayListOf(),
+    @SerializedName("price"       ) var price       : Int?             = null
 
 )
 
