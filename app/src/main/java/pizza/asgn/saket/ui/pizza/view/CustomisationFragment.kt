@@ -64,6 +64,10 @@ class CustomisationFragment(val defaultCrustId : Int, val defaultSizeId : Int, v
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.toolbarLayout.toolbarTitleTv.text = getString(R.string.add_pizza)
+        binding.toolbarLayout.toolbarBackIv.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
         val dataa = viewModel.pizzaInfo.value!!.data
         binding.crustRv.adapter = crustsDataAdapter
         crustsDataAdapter.setCrustList(dataa?.crusts)

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -34,6 +35,8 @@ class PizzaInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.dataa = viewModel.pizzaInfo.value?.data
+        binding.toolbarLayout.toolbarTitleTv.text = getString(R.string.app_name)
+        binding.toolbarLayout.toolbarBackIv.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_local_pizza_24))
         val dataa = viewModel.pizzaInfo.value?.data
         val defaultCrustId = dataa?.defaultCrust
         val defaultCrustObject = dataa?.crusts?.filter { itt-> itt.id == defaultCrustId } as ArrayList<Crusts>

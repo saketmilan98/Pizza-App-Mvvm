@@ -5,4 +5,8 @@
     <string name="add_item">Add item</string>
     <string name="place_order">Place Order</string>
     <string name="view_items">View Items</string>
+    <string name="add_pizza">Add Pizza</string>
+    <string name="cart">Cart</string>
+    <string name="crust">Crust</string>
+    <string name="size">Size</string>
 </resources>

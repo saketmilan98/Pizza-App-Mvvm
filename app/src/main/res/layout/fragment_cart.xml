@@ -17,10 +17,14 @@
         android:focusable="true"
         tools:context=".ui.pizza.view.CartFragment">
 
+        <include layout="@layout/toolbar_layout"
+            android:id="@+id/toolbarLayout"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pizza_list_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="58dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"

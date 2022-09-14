@@ -44,6 +44,10 @@ class CartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.toolbarLayout.toolbarTitleTv.text = getString(R.string.cart)
+        binding.toolbarLayout.toolbarBackIv.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
         binding.pizzaListRv.adapter = cartDataAdapter
         setCartRvData()
         viewModel.pizzaInCartList.observe(viewLifecycleOwner, Observer {
