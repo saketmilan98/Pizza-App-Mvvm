@@ -25,3 +25,15 @@ data class Sizes (
     @SerializedName("name"  ) var name  : String? = null,
     @SerializedName("price" ) var price : Int?    = null
 )
+
+data class PizzaCartItem (
+    var pizzaId : String? = null,
+    var pizzaName : String? = null,
+    var crustId : Int?    = null,
+    var crustName : String? = null,
+    var sizeId : Int?    = null,
+    var sizeName : String?    = null,
+    var price : Int? = null,
+    var isVeg : Boolean? = null,
+    var itemCount : String? = null
+)

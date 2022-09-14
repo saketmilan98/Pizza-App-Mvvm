@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="pizzaItem"
+            type="pizza.asgn.saket.ui.pizza.model.PizzaCartItem"/>
+
+        <variable
+            name="totalPrice"
+            type="Integer"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="4dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/background_cl">
+
+                <ImageView
+                    android:id="@+id/type_iv"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    app:layout_constraintTop_toTopOf="@+id/name_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:imageDrawable="@{pizzaItem.isVeg ? @drawable/veg_green_dot :@drawable/non_veg_red_dot}"
+                    tools:srcCompat="@drawable/non_veg_red_dot"
+                    />
+
+                <TextView
+                    android:id="@+id/name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/type_iv"
+                    android:layout_marginStart="4dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:text="@={pizzaItem.pizzaName}"
+                    tools:text="Non-veg pizza"
+                    />
+
+                <TextView
+                    android:id="@+id/price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/name_tv"
+                    app:layout_constraintBottom_toTopOf="@+id/crust_size_tv"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:text="@{`₹`+ pizzaItem.price}"
+                    tools:text="₹245"
+                    />
+
+                <TextView
+                    android:id="@+id/crust_size_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@+id/price_tv"
+                    app:layout_constraintStart_toStartOf="@+id/name_tv"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="4dp"
+                    android:text="@{pizzaItem.crustName +`, `+ pizzaItem.sizeName}"
+                    tools:text="New Hand Tossed"
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/add_remove_cl"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/total_price_tv"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    android:translationZ="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/red_border_light_bg_round"
+                    >
+
+                    <TextView
+                        android:id="@+id/add_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/minus_icon_tv"
+                        app:layout_constraintEnd_toStartOf="@+id/add_icon_tv"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="#FF0000"
+                        android:text="@{pizzaItem.itemCount}"
+                        />
+
+                    <TextView
+                        android:id="@+id/minus_icon_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/add_tv"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textColor="#FF0000"
+                        android:text="—"
+                        />
+
+                    <TextView
+                        android:id="@+id/add_icon_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/add_tv"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textColor="#FF0000"
+                        android:text="+"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/total_price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@+id/add_remove_cl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/black"
+                    android:text="@{`₹`+ totalPrice}"
+                    tools:text="₹245"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

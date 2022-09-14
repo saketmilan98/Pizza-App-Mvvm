@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import pizza.asgn.saket.R
 import pizza.asgn.saket.databinding.OptionsRvLayoutBinding
 import pizza.asgn.saket.ui.pizza.model.Crusts
+import pizza.asgn.saket.ui.pizza.model.Sizes
 
-class CrustsDataAdapter(val context : Context, val onItemClicked: (Crusts, Int) -> Unit) : RecyclerView.Adapter<CrustsDataAdapter.CrustsViewHolder>() {
+class CrustsDataAdapter(val context : Context, val onItemClicked: (Crusts, Sizes, Int) -> Unit) : RecyclerView.Adapter<CrustsDataAdapter.CrustsViewHolder>() {
 
     private var crustDataa: ArrayList<Crusts>? = null
     var selectedCrustId = -1
@@ -27,7 +28,8 @@ class CrustsDataAdapter(val context : Context, val onItemClicked: (Crusts, Int) 
         val currentItem: Crusts = crustDataa!![i]
         crustsViewHolder.crustListItemBinding.crustData = currentItem
         crustsViewHolder.crustListItemBinding.root.setOnClickListener {
-            onItemClicked(currentItem, i)
+            val defaultSizeItem = (currentItem.sizes.filter { itt-> itt.id == currentItem.defaultSize } as ArrayList<Sizes>)[0]
+            onItemClicked(currentItem, defaultSizeItem, i)
             selectedCrustId = currentItem.id?:-1
             notifyDataSetChanged()
         }

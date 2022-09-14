@@ -1,5 +1,6 @@
 package pizza.asgn.saket.ui.pizza.viewmodel
 
+import android.os.Build
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +11,7 @@ import com.google.gson.JsonElement
 import okhttp3.ResponseBody
 import pizza.asgn.saket.network.ApiInterface
 import pizza.asgn.saket.network.RetrofitClient
+import pizza.asgn.saket.ui.pizza.model.PizzaCartItem
 import pizza.asgn.saket.ui.pizza.model.PizzaInfoDataClass
 import pizza.asgn.saket.utils.Resource
 import pizza.asgn.saket.utils.Status
@@ -22,6 +24,9 @@ class MainViewModel : ViewModel() {
 
     private val _pizzaInfo: MutableLiveData<Resource<PizzaInfoDataClass>> = MutableLiveData()
     val pizzaInfo: LiveData<Resource<PizzaInfoDataClass>> = _pizzaInfo
+
+    private val _pizzaInCartList: MutableLiveData<LinkedHashMap< PizzaCartItem, Int >> = MutableLiveData()
+    val pizzaInCartList: LiveData<LinkedHashMap<PizzaCartItem, Int >> = _pizzaInCartList
 
     suspend fun getPizzaInfo(){
         _pizzaInfo.postValue(Resource.loading(null))
@@ -43,4 +48,24 @@ class MainViewModel : ViewModel() {
             }
         }
     }
+
+    fun getPizzaInCartList() : LinkedHashMap<PizzaCartItem, Int> {
+        return _pizzaInCartList.value?: LinkedHashMap()
+    }
+
+    fun addPizzaItem(pizzaItem : PizzaCartItem){
+        val tempHashMap = _pizzaInCartList.value?: LinkedHashMap()
+        tempHashMap[pizzaItem] = (tempHashMap[pizzaItem]?:0)+1
+        _pizzaInCartList.postValue(tempHashMap)
+    }
+
+    fun removePizzaItem(pizzaItem : PizzaCartItem){
+        val tempHashMap = _pizzaInCartList.value?:LinkedHashMap()
+        tempHashMap[pizzaItem] = (tempHashMap[pizzaItem]?:0)-1
+        if((tempHashMap[pizzaItem]?:0)<=0){
+            tempHashMap.remove(pizzaItem)
+        }
+        _pizzaInCartList.postValue(tempHashMap)
+    }
+
 }

@@ -1,21 +1,19 @@
 package pizza.asgn.saket.ui.pizza.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import pizza.asgn.saket.R
 import pizza.asgn.saket.databinding.FragmentPizzaInfoBinding
 import pizza.asgn.saket.ui.pizza.model.Crusts
 import pizza.asgn.saket.ui.pizza.model.Sizes
 import pizza.asgn.saket.ui.pizza.viewmodel.MainViewModel
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class PizzaInfoFragment : Fragment() {
     val viewModel: MainViewModel by activityViewModels()
@@ -46,7 +44,39 @@ class PizzaInfoFragment : Fragment() {
             binding.priceTv.text = "₹${defaultSizeObject[0].price}"
         }
         binding.addTv.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, CustomisationFragment(defaultCrustId?:-1, defaultSizeId?:-1)).addToBackStack(null).commit()
+            requireActivity().supportFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, CustomisationFragment(defaultCrustId?:-1, defaultSizeId?:-1, dataa)).addToBackStack(null).commit()
         }
+        binding.addIconTv.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, CustomisationFragment(defaultCrustId?:-1, defaultSizeId?:-1, dataa)).addToBackStack(null).commit()
+        }
+        binding.minusIconTv.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, CartFragment()).addToBackStack(null).commit()
+        }
+        binding.viewCartCl.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, CartFragment()).addToBackStack(null).commit()
+        }
+
+        viewModel.pizzaInCartList.observe(viewLifecycleOwner, Observer {
+            var sum = 0
+            var totalPrice = 0
+            for((k,v) in it){
+                sum += v
+                totalPrice+= ((k.price?:1)*v)
+            }
+            if(sum==0){
+                binding.addTv.text = "ADD"
+                binding.addIconTv.isVisible = false
+                binding.minusIconTv.isVisible = false
+                binding.viewCartCl.isVisible = false
+            }
+            else {
+                binding.addTv.text = "$sum"
+                binding.addIconTv.isVisible = true
+                binding.minusIconTv.isVisible = true
+                binding.viewCartCl.isVisible = true
+                binding.totalPriceTv.text = "₹$totalPrice"
+            }
+        })
+
     }
 }
